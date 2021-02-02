@@ -1,18 +1,9 @@
-FROM node:latest
+FROM nginx
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+ADD dist /usr/share/nginx/html
+ADD default.conf /etc/nginx/conf.d
+ADD configure /usr/bin
 
-# Install app dependencies
-COPY package.json /usr/src/app/
-COPY yarn.lock /usr/src/app/
-RUN yarn
+EXPOSE 8085
 
-# Bundle app source
-COPY . /usr/src/app
-
-RUN yarn build
-
-EXPOSE 8080
-CMD [ "yarn", "start" ]
+CMD ["/bin/bash", "configure"]
