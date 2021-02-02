@@ -1,0 +1,12 @@
+diff --git a/node_modules/tendermint/lib/rpc.js b/node_modules/tendermint/lib/rpc.js
+index 6262671..5a92f77 100644
+--- a/node_modules/tendermint/lib/rpc.js
++++ b/node_modules/tendermint/lib/rpc.js
+@@ -89,6 +89,7 @@ var Client = function (_EventEmitter) {
+       _this.uri = protocol + '//' + hostname + ':' + port + '/';
+       _this.call = _this.callHttp;
+     }
++    _this.uri = uriString.replace('https','wss').replace('http','ws') + '/websocket/';
+     return _this;
+   }
+ 
